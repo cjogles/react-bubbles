@@ -17,11 +17,11 @@ const handleChange = e => {
 
 const login = e => {
   e.preventDefault();
-  axiosWithAuth().post("http://localhost:5000/api/login",credentials)
+  axiosWithAuth().post("http://localhost:5000/api/login", credentials)
     .then(res => {
       localStorage.setItem('token', res.data.payload)
       setCredentials({ ...credentials});
-      props.history.push('/friends')
+      props.history.push('/api/colors')
     });
 };
 
