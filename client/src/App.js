@@ -12,7 +12,7 @@ function App() {
           <nav>
             <ul>
               <li>
-                <Link to="/login">Login Page</Link>
+                <Link to="/">Login Page</Link>
               </li>
               <li>
                 <Link to="/api/colors">Bubble Page</Link>
@@ -22,7 +22,7 @@ function App() {
         </div>
       <div className="App">
         <Switch>
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/" component={Login} />
           {/* 
             Build a PrivateRoute component that will 
             display BubblePage when you're authenticated 
