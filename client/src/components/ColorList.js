@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import axios from "axios";
+import { axiosWithAuth } from "../axiosWithAuth/AxiosWithAuth";
 
 const initialColor = {
   color: "",
   code: { hex: "" }
 };
 
-const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
+const ColorList = (props) => {
+  console.log(props.colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
-
+console.log(colorToEdit)
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
@@ -21,17 +22,30 @@ const ColorList = ({ colors, updateColors }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
+// * **[PUT]** to `/api/colors/:id`: updates the color using the `id` passed as part of the URL. Send the color 
+//object with the updated information as the `body` of the request (the second argument passed to `axios.put`).
+    axiosWithAuth()
+      .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
+      .then(res => { console.log(res)})
+      //   props.updateColors(res.data);
+      //   props.history.push("/api/colors");
+      // })
+      // .catch(err => console.log(err));
   };
 
   const deleteColor = color => {
     // make a delete request to delete this color
+//* **[DELETE]** to `/api/colors/123`: removes the color using the `id` passed as part of the URL (123 in example).
+    axiosWithAuth()
+      .delete(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
+      .then(res => { console.log(res)})
   };
 
   return (
     <div className="colors-wrap">
       <p>colors</p>
       <ul>
-        {colors.map(color => (
+        {props.colors.map(color => (
           <li key={color.color} onClick={() => editColor(color)}>
             <span>
               <span className="delete" onClick={e => {

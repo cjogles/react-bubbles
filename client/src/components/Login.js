@@ -15,7 +15,7 @@ const handleChange = e => {
   });
 };
 
-const login = e => {
+const login = (e) => {
   e.preventDefault();
   axiosWithAuth().post("http://localhost:5000/api/login", credentials)
     .then(res => {
